@@ -1,0 +1,20 @@
+:toc: left
+:numbered:              // Number all section headers
+:sectnumlevels: 5       // Number up to section level 5
+:toclevels: 2           // Table of content should have only two levels
+
+= SDV PSD2 Architecture check
+
+[[default]]
+[role=group,includesGroups="maven:Default,package:Default,layer:Default,api:Default"]
+
+
+== Included Basic Rules
+include::maven.adoc[]
+include::package.adoc[]
+include::layer.adoc[]
+include::api.adoc[]
+
+== Imported Rules
+
+include::jQA:ImportedRules[]

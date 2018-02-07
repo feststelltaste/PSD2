@@ -1,0 +1,36 @@
+[[maven:Default]]
+[role=group,includesConcepts="maven:ProjectArtifactDependencyDiagram"]
+== Maven
+
+This chapter describes the rules related to Maven.
+
+=== Concepts
+
+[[maven:MainArtifact]]
+.Labels all main artifacts created by Maven modules with `Main`
+[source,cypher,role=concept]
+----
+MATCH
+  (:Maven:Project)-[:CREATES]->(mainArtifact:Artifact)
+WHERE
+  mainArtifact.type <> "test-jar"
+SET
+  mainArtifact:Main
+RETURN
+  mainArtifact as MainArtifact
+----
+
+=== Reports
+
+[[maven:ProjectArtifactDependencyDiagram]]
+[source,cypher,role=concept,requiresConcepts="maven:MainArtifact",reportProperties="render=component-diagram"]
+.Creates a diagram about project artifact dependencies.
+----
+MATCH
+  (:Maven:Project)-[:CREATES]->(artifact:Artifact)
+OPTIONAL MATCH
+  (artifact)-[dependsOn:DEPENDS_ON]->(:Artifact)<-[:CREATES]-(:Maven:Project)
+RETURN
+  *
+----
+
