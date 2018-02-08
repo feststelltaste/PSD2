@@ -1,0 +1,37 @@
+[[api:Default]]
+[role=group,includesConcepts="api:ApiModel",includesConstraints="api:ApiModelInWrongPackage"]
+== API
+
+=== Concepts
+
+[[api:ApiModel]]
+.All API models can be identified by the Annotation +@ApiModel+
+[source,cypher,role=concept]
+----
+MATCH
+  (c:Class)-[:ANNOTATED_BY]-()-[:OF_TYPE]->(a:Type { fqn: "io.swagger.annotations.ApiModel" })
+SET c:Api:ApiModel
+RETURN
+  c.name AS ApiModelClass
+ORDER BY ApiModelClass
+----
+
+
+The following constraints are verified:
+
+- <<api:ApiModelInWrongPackage>>
+
+=== Constraints
+
+[[api:ApiModelInWrongPackage]]
+.All +@ApiModel+ classes must be located in packages named "model".
+[source,cypher,role=constraint,requiresConcepts="api:ApiModel"]
+----
+MATCH
+  (package:Package)-[:CONTAINS]->(c:Api:ApiModel)
+WHERE
+  package.name <> "model"
+RETURN
+  c AS ApiModelInWrongPackage
+----
+
