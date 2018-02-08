@@ -9,7 +9,7 @@
 [role=group,includesGroups="maven:Default,package:Default,layer:Default,api:Default"]
 
 
-== Included Basic Rules
+== Basic Rules
 include::maven.adoc[]
 include::package.adoc[]
 include::layer.adoc[]
