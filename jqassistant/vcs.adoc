@@ -1,0 +1,18 @@
+[[vcs:Default]]
+[role=group,includesConcepts="vcs:GitToJavaConnection"]
+== Version Control Repository
+
+=== Concepts
+
+[[vcs:GitToJavaConnection]]
+.Creates a relationship between a changed File and the Java Type.
+[source,cypher,role=concept]
+----
+MATCH (c:Git:Change)--(g:Git:File), (t:Java:Type)
+WITH g, t, c, "^.*" + REPLACE(t.fileName, ".class", ".java") + "$" as regexPath
+WHERE g.relativePath =~ regexPath
+CREATE UNIQUE
+    (t)-[change:HAS_CHANGE]->(c)
+RETURN COUNT(change) as Changes
+----
+

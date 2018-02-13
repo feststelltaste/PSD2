@@ -6,15 +6,17 @@
 = SDV PSD2 Architecture check
 
 [[default]]
-[role=group,includesGroups="maven:Default,package:Default,layer:Default,api:Default,codeanalysis:Default"]
+[role=group,includesGroups="maven:Default,package:Default,layer:Default,business:Default,api:Default,codeanalysis:Default,vcs:Default"]
 
 
 == Basic Rules
 include::maven.adoc[]
 include::package.adoc[]
 include::layer.adoc[]
+include::business.adoc[]
 include::api.adoc[]
 include::codeanalysis.adoc[]
+include::vcs.adoc[]
 
 == Imported Rules
 
